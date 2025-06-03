@@ -12,6 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatPaginator } from '@angular/material/paginator';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import {environment} from '../environments/environment.prod'
 
 @NgModule({
   declarations: [
@@ -28,10 +31,12 @@ import { MatPaginator } from '@angular/material/paginator';
     MatIconModule,
     MatInputModule,
     HttpClientModule,
-    MatPaginator
+    MatPaginator,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
   ],
   providers: [
-   // provideAnimationsAsync()
+   provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

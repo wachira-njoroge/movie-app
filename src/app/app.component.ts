@@ -16,7 +16,7 @@ import { initializeApp } from 'firebase/app';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   title = 'movie-app';
   trendingMoviesList!: any[];
   filteredTrendingMovies!: any[];
@@ -25,26 +25,16 @@ export class AppComponent implements OnInit, AfterViewInit {
   pageSize = 20;
   pageSizeOptions = [10, 30, 40, 50];
   paginatedMovies: any[] = [];
-  auth: any;
+  auth:any
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    const app = initializeApp(environment.firebaseConfig)
+    this.auth = getAuth(app)
+  }
 
   ngOnInit() {
-    const firebaseConfig = {
-      apiKey: 'AIzaSyCHnfPtp9Bjs2dwt9W_NezWG8bOtSFX8YA',
-      authDomain: 'bliss-movies.firebaseapp.com',
-      projectId: 'bliss-movies',
-      storageBucket: 'bliss-movies.firebasestorage.app',
-      messagingSenderId: '1075716313376',
-      appId: '1:1075716313376:web:04befd1e5212be0627c745',
-    };
-
-    const app = initializeApp(firebaseConfig);
-    this.auth = getAuth(app);
     this.getTrendingMovies();
-  }
-  ngAfterViewInit(): void {
-    this.getRedirectResult();
+    this.getfirebaseRedirectResult();
     onAuthStateChanged(this.auth, (user) => {
       console.log('Usser value :; ', user);
     });
@@ -91,12 +81,12 @@ export class AppComponent implements OnInit, AfterViewInit {
       console.error('Sign-in error:', error);
     });
   }
-  getRedirectResult() {
+  getfirebaseRedirectResult() {
     getRedirectResult(this.auth)
       .then((result) => {
         console.log('Result value is :: ', result);
 
-        if (result) {
+        if (result?.user) {
           console.log('User:', result.user);
         } else {
           console.log('No redirect result');
