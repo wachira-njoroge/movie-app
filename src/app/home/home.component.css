@@ -1,0 +1,87 @@
+.main{
+  height: 100vh;
+}
+.topBar{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 65px;
+  height: 100px;
+}
+.topBar img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.logo{
+  padding-top: 100px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+.search-card {
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.search-bar {
+  width: 700px;
+  border-radius: 50px;
+
+  ::ng-deep .mat-form-field-outline {
+    border-radius: 50px;
+  }
+
+  ::ng-deep .mat-form-field-outline-start,
+  ::ng-deep .mat-form-field-outline-end,
+  ::ng-deep .mat-form-field-flex {
+    border-radius: 50px;
+  }
+}
+.mainContent{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.movieCard{
+  width: 160px;
+  margin: 10px;
+  height: 350px;
+  border-radius: 8px;
+}
+.ratingView {
+  position: absolute;
+  bottom: -6px;
+  left: -4px;
+  width: 30px;
+  height: 30px;
+  background-color: #f5d8f5;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-size: 12px;
+}
+
+.ratingView p {
+  margin: 0;
+}
+.movieCard img{
+  width: 100%;
+  height: 80%;
+  border-radius: 8px;
+}
+.movieTitle{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: bold;
+  margin-left: 45px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}

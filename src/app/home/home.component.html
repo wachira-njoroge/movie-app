@@ -1,0 +1,49 @@
+<mat-card class="main">
+  <div class="topBar">
+    <div class="logo">
+    <img alt="Company Logo" [src]="'assets/bliss-movies-resolution-logo.png'"
+    />
+  </div>
+  <div class="search-card">
+    <mat-form-field appearance="outline" class="search-bar">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Search Movies" (input)="onMovieSearch($event)"/>
+    </mat-form-field>
+  </div>
+  <div></div>
+  </div>
+  <section class="mainContent" >
+    <!--Create a card display for each movies-->
+    <div *ngFor="let movie of filteredTrendingMovies">
+      <mat-card class="movieCard">
+        <img
+          alt="Movie poster"
+          [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+        />
+        <div class="ratingView">
+          <p>{{ ratingPercent(movie.popularity) }}</p>
+        </div>
+        <div class="movieTitle">
+          <div>
+            {{ movie.title || movie.name }}
+          </div>
+          <div>
+            {{movie.first_air_date || movie.release_date}}
+          </div>
+
+        </div>
+      </mat-card>
+    </div>
+    <!--Pagination-->
+    <mat-paginator
+      [length]="filteredTrendingMovies.length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      [pageIndex]="currentPage"
+      (page)="onPageChange($event)"
+      showFirstLastButtons
+      class="movie-paginator">
+    </mat-paginator>
+  </section>
+
+</mat-card>
