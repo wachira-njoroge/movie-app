@@ -18,7 +18,7 @@ jobs:
     
     # Get env file in host for use in the docker context
     - name: Get ENV variables
-      run: cp /home/wachira/movies-app/environments src
+      run: cp -R /home/wachira/movies-app/environments src
     
     # Create an Image
     - name: Build Docker image
