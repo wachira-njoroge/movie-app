@@ -19,6 +19,11 @@ jobs:
     # Get env file in host for use in the docker context
     - name: Get ENV variables
       run: cp -R /home/wachira/movies-app/environments src
+
+    - name: PreBuild Project Before image creation to utilize available system resources
+      run: | 
+        npm install
+        ng build --configuration=production --verbose
     
     # Create an Image
     - name: Build Docker image
