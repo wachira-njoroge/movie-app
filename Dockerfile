@@ -26,8 +26,8 @@ COPY --from=build /app/movies-app/dist/movie-app/browser /usr/share/nginx/html
 COPY --from=build /app/movies-app/dist/movie-app/browser/favicon.ico /usr/share/nginx/html/favicon.ico
 
 
-# Copy custom Nginx configuration if needed
-COPY nginx.conf /etc/nginx/nginx.conf
+# Copy custom Nginx configuration
+# COPY /etc/nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 80
 EXPOSE 8090
