@@ -8,7 +8,7 @@ WORKDIR /app/movies-app
 COPY package*.json ./
 
 # Install the dependencies
-RUN npm ci
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
