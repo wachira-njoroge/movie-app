@@ -8,8 +8,12 @@ import {
   getAuth,
   getRedirectResult,
   onAuthStateChanged,
+  signInWithPopup,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { MovieDetailsDialog } from './utils/dialog-view';
 
 @Component({
   selector: 'app-root',
@@ -27,16 +31,20 @@ export class AppComponent implements OnInit {
   paginatedMovies: any[] = [];
   auth:any
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router:Router) {
     const app = initializeApp(environment.firebaseConfig)
     this.auth = getAuth(app)
   }
 
   ngOnInit() {
     this.getTrendingMovies();
-    this.getfirebaseRedirectResult();
     onAuthStateChanged(this.auth, (user) => {
-      console.log('Usser value :; ', user);
+      if(user?.providerData){
+        //reroute to home page
+        this.router.navigate(['/home'],{
+          state: {user: user.providerData}
+        })
+      }
     });
   }
   getTrendingMovies() {
@@ -75,25 +83,8 @@ export class AppComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.updatePaginator();
   }
-  gmailLogin() {
-    const provider = new GoogleAuthProvider();
-    signInWithRedirect(this.auth, provider).catch((error) => {
-      console.error('Sign-in error:', error);
-    });
+  async gmailLogin() {
+    await signInWithPopup(this.auth, new GoogleAuthProvider());
   }
-  getfirebaseRedirectResult() {
-    getRedirectResult(this.auth)
-      .then((result) => {
-        console.log('Result value is :: ', result);
 
-        if (result?.user) {
-          console.log('User:', result.user);
-        } else {
-          console.log('No redirect result');
-        }
-      })
-      .catch((err) => {
-        console.error('Redirect error:', err);
-      });
-  }
 }
