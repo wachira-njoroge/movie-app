@@ -18,6 +18,7 @@ interface MovieDetails {
   <div  class="backdrop"
     [style.backgroundImage]="'url(https://image.tmdb.org/t/p/w780' + movieDetails.backdropImage +')'"  >
   >
+  <mat-icon class="close" (click)="closeDialog()">close</mat-icon>
     <div class="content">
       <p>{{movieDetails.title}} ({{ movieDetails.release_date.slice(0,4)}})</p>
 
@@ -62,5 +63,8 @@ export class MovieDetailsDialog {
     this.movieDetails.overview = this.data.overview
     this.movieDetails.country = this.data.origin_country
     this.movieDetails.popularity = this.data.popularity
+  }
+  closeDialog(){
+    this.dialogRef.close()
   }
 }

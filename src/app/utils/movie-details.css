@@ -19,3 +19,9 @@
   font-size: x-large;
   padding: 20px;
 }
+.close{
+  position: absolute;
+  top:2px;
+  right: 2px;
+  color: red;
+}
