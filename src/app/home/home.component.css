@@ -4,8 +4,8 @@
 .topBar{
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
   margin-left: 65px;
   height: 100px;
 }
@@ -84,4 +84,34 @@
   margin-left: 45px;
   padding-top: 15px;
   padding-bottom: 10px;
+}
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-text {
+  font-size: 18px;
+}
+
+mat-icon {
+  font-size: 24px;
+  color: #444;
+}
+
+button[mat-icon-button] {
+  margin-left: auto;
 }

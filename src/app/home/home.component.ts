@@ -2,6 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { getAuth, signOut } from "firebase/auth";
+import { MatDialog } from '@angular/material/dialog';
+import { MovieDetailsDialog } from '../utils/dialog-view';
 
 @Component({
   selector: 'app-home',
@@ -15,13 +20,21 @@ export class HomeComponent {
   //
   currentPage = 0;
   pageSize = 20
-  pageSizeOptions = [10, 30, 40, 50];
+  pageSizeOptions = [20, 30, 40, 50];
   paginatedMovies: any[] = [];
+  displayName!: string
+  displayPhoto!: string
 
-  constructor(private httpClient: HttpClient){}
+  constructor(private httpClient: HttpClient, private router: Router, private dialog: MatDialog){}
 
   ngOnInit(): void {
-   this.getTrendingMovies()
+    const user = window.history.state['user']
+    this.updateProfile(user)
+    this.getTrendingMovies()
+  }
+  updateProfile(user:any){
+    this.displayName = user[0].displayName
+    this.displayPhoto = user[0].photoURL
   }
   getTrendingMovies(){
     //Get movies list from TMDB
@@ -52,5 +65,20 @@ export class HomeComponent {
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
     this.updatePaginator();
+  }
+  logout(){
+    signOut(getAuth()).then(()=>{
+      //reroute to login
+      this.router.navigate(['/login'])
+    })
+  }
+  displayMovieDetails(movie:any){
+    this.dialog.open(MovieDetailsDialog,{
+      width: '900px',
+      height: '500px',
+      data: movie,
+      disableClose:false,
+      position: {top: '100px'}
+    })
   }
 }

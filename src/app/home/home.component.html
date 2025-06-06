@@ -10,12 +10,18 @@
       <input matInput placeholder="Search Movies" (input)="onMovieSearch($event)"/>
     </mat-form-field>
   </div>
-  <div></div>
+  <div class="profile">
+    <div class="profile-text">
+      <p><b>Welcome,</b> {{ displayName }}</p>
+    </div>
+    <mat-icon (click)="logout()" role="button" aria-label="Logout" matTooltip="Logout">exit_to_app</mat-icon>
+  </div>
+
   </div>
   <section class="mainContent" >
     <!--Create a card display for each movies-->
     <div *ngFor="let movie of filteredTrendingMovies">
-      <mat-card class="movieCard">
+      <mat-card class="movieCard" (click)="displayMovieDetails(movie)">
         <img
           alt="Movie poster"
           [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
