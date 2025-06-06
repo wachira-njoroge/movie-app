@@ -1,11 +1,11 @@
 
 .login {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  height: 400px;
+  height: 510px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,10 +20,21 @@
 }
 
 .login > div {
-  text-align: center
+  text-align: center;
+}
+.welcomeTxt{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: large;
 }
 .gmailBtn{
-  width: 200px;
+  width: 90%;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgba(245, 212, 25, 0.89);
+  border: 1px solid rgba(245, 212, 25, 0.89);
+  border-radius: 4px;
+  color: white;
+  font-size: 18px;
 }
 
 .authBtn{
@@ -31,3 +42,33 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.signUpBtn{
+  width: 90%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  background-color: rgba(98, 20, 243, 0.89);
+  border: 1px solid rgba(98, 20, 243, 0.89);
+  border-radius: 4px;
+  color: white;
+  font-size: 18px;
+}
+.loginBtn{
+  width: 90%;
+  padding: 10px;
+  background-color: rgba(55, 228, 2, 0.89);
+  border: 1px solid rgba(76, 245, 25, 0.89);
+  border-radius: 4px;
+  font-size: 18px;
+  color: white;
+}
+.username{
+  width: 90%;
+  border-radius: 5px;
+}
+.password{
+  width: 90%;
+  border-radius: 5px;
+}
+
+

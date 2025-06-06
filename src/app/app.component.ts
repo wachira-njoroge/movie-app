@@ -9,11 +9,14 @@ import {
   getRedirectResult,
   onAuthStateChanged,
   signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieDetailsDialog } from './utils/dialog-view';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +27,9 @@ export class AppComponent implements OnInit {
   title = 'movie-app';
   trendingMoviesList!: any[];
   filteredTrendingMovies!: any[];
+  //
+  usernameControl = new FormControl()
+  passwordControl = new FormControl()
   //
   currentPage = 0;
   pageSize = 20;
@@ -40,6 +46,8 @@ export class AppComponent implements OnInit {
     this.getTrendingMovies();
     onAuthStateChanged(this.auth, (user) => {
       if(user?.providerData){
+        console.log("User data is :; ", user);
+
         //reroute to home page
         this.router.navigate(['/home'],{
           state: {user: user.providerData}
@@ -85,6 +93,45 @@ export class AppComponent implements OnInit {
   }
   async gmailLogin() {
     await signInWithPopup(this.auth, new GoogleAuthProvider());
+  }
+  /**
+   * Firebase handles password hashing and salting. It also handles email validation.
+   * I will ride on that functionality since I am not saving user data password in the application
+   */
+  async signUp(){
+    try{
+      if(this.validateInputFields()){
+        const email = this.usernameControl.value
+        const password = this.passwordControl.value
+        await createUserWithEmailAndPassword(this.auth,email, password)
+      }
+    }catch(error:any){
+      alert(error.message)
+    }
+  }
+  async loginWithPassword(){
+    try{
+      if(this.validateInputFields()){
+        const email = this.usernameControl.value
+        const password = this.passwordControl.value
+        await signInWithEmailAndPassword(this.auth, email, password)
+      }
+    }catch(error:any){
+      alert(error.message)
+    }
+  }
+  validateInputFields():boolean{
+    const emailInput = this.usernameControl.value
+    const passwordInput = this.passwordControl.value
+    if(!emailInput){
+      alert("Email is required")
+      return false
+    }
+    if(!passwordInput){
+      alert("Input a password to proceed")
+      return false
+    }
+    return true
   }
 
 }

@@ -1,19 +1,16 @@
 <mat-card class="login">
     <img alt="Company Logo" [src]="'assets/bliss-movies-resolution-logo.png'"  />
-    <div>
-       <p>Welcome To Bliss Movies</p>
-        <div class="authBtn">
-          <button mat-button>Sign In</button>
-          <button mat-button>Sign Up</button>
-        </div>
-      <button mat-button (click)="gmailLogin()" class="gmailBtn">Continue with Gmail</button>
-    </div>
-    <mat-form-field appearance="outline">
-        <input matInput placeholder="Username">
+
+    <p class="welcomeTxt">Welcome To Bliss Movies</p>
+    <button mat-button (click)="gmailLogin()" class="gmailBtn">SignIn With Gmail</button>
+    <mat-form-field appearance="outline" class="username">
+        <input matInput placeholder="Username" [formControl]="usernameControl">
     </mat-form-field>
-    <mat-form-field appearance="outline">
-        <input matInput placeholder="Password">
+    <mat-form-field appearance="outline" class="password">
+        <input matInput placeholder="Password" [formControl]="passwordControl" type="password" >
     </mat-form-field>
+    <button matButton (click)="loginWithPassword()" class="loginBtn">Login</button>
+    <button matButton (click)="signUp()" class="signUpBtn">SignUp</button>
 
 </mat-card>
 <router-outlet></router-outlet>
