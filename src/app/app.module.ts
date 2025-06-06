@@ -15,10 +15,16 @@ import { MatPaginator } from '@angular/material/paginator';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import {environment} from '../environments/environment.prod'
+import { HomeComponent } from './home/home.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule} from '@angular/material/dialog'
+import { MovieDetailsDialog } from './utils/dialog-view';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    MovieDetailsDialog
   ],
   imports: [
     BrowserModule,
@@ -32,12 +38,14 @@ import {environment} from '../environments/environment.prod'
     MatInputModule,
     HttpClientModule,
     MatPaginator,
+    MatTooltipModule,
+    MatDialogModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
   ],
   providers: [
    provideAnimationsAsync()
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, HomeComponent]
 })
 export class AppModule { }
