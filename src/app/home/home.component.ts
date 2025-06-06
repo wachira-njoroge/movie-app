@@ -33,7 +33,7 @@ export class HomeComponent {
     this.getTrendingMovies()
   }
   updateProfile(user:any){
-    this.displayName = user[0].displayName
+    this.displayName = user[0].displayName || user[0].email
     this.displayPhoto = user[0].photoURL
   }
   getTrendingMovies(){
