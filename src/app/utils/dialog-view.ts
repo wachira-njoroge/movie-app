@@ -45,7 +45,7 @@ export class MovieDetailsDialog {
     overview:'',
     country: '',
     popularity: ''
-  };
+  }
 
   constructor(
     public dialogRef: MatDialogRef<MovieDetailsDialog>,
@@ -55,8 +55,6 @@ export class MovieDetailsDialog {
   }
 
   displayDetails() {
-    console.log("Data view :: ", this.data);
-
     this.movieDetails.backdropImage = this.data.backdrop_path;
     this.movieDetails.title = this.data.name || this.data.title;
     this.movieDetails.release_date = this.data.first_air_date || this.data.release_date

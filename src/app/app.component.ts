@@ -46,8 +46,6 @@ export class AppComponent implements OnInit {
     this.getTrendingMovies();
     onAuthStateChanged(this.auth, (user) => {
       if(user?.providerData){
-        console.log("User data is :; ", user);
-
         //reroute to home page
         this.router.navigate(['/home'],{
           state: {user: user.providerData}
